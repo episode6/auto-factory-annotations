@@ -16,6 +16,13 @@ node {
         '')
   }
   
-  gradleRunner.buildAndTest()
+  stage('build') {
+    gradleRunner.runGradle("build", "clean assemble", false)
+  }
+
+  stage('test') {
+    gradleRunner.runGradle("test", "check", false)
+  }
+
   gradleRunner.maybeDeploy()
 }
