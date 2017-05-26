@@ -3,7 +3,7 @@ AutoFactory Annotations
 
 A standalone packaging of the annotations from [Google's AutoFactory library][1].
 
-(Inspired by JakeWharton's [AutoValueAnnotations][3])
+Inspired by (and README copied from) JakeWharton's [AutoValueAnnotations][3]
 
 When using AutoFactory with Gradle it is _highly_ inconvenient to specify the dependency both as
 `annotationProcessor` and `provided`. Doing so leaks all of AutoFactory's annotation processor code and its
@@ -17,7 +17,7 @@ Download
 
 ```groovy
 annotationProcessor 'com.google.auto.factory:auto-factory:1.0-beta5'
-provided 'com.episode6.hackit.auto.factory:auto-factory-annotations:0.0.1-SNAPSHOT'
+provided 'com.episode6.hackit.auto.factory:auto-factory-annotations:1.0-beta5'
 ```
 
 

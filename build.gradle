@@ -19,7 +19,7 @@ repositories {
 }
 
 group = 'com.episode6.hackit.auto.factory'
-version = '0.0.1-SNAPSHOT'
+version = '1.0-beta5'
 
 apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
