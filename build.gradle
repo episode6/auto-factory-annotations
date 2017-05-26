@@ -5,6 +5,7 @@ buildscript {
   dependencies { 
     classpath 'com.episode6.hackit.deployable:deployable:0.1.5'
     classpath 'com.episode6.hackit.gdmc:gdmc:0.1.4'
+    classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.0'
   }
 }
 
@@ -20,19 +21,44 @@ repositories {
 group = 'com.episode6.hackit.auto.factory'
 version = '0.0.1-SNAPSHOT'
 
-
 apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'com.episode6.hackit.deployable.jar'
 apply plugin: 'com.episode6.hackit.gdmc'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-dependencies {
-  compile 'com.google.code.findbugs:jsr305'
-  testCompile 'junit:junit'
-  testCompile 'org.easytesting:fest-assert-core'
+configurations {
+  pomCompile
 }
+
+dependencies {
+  compile('com.google.auto.factory:auto-factory')
+  pomCompile 'javax.annotation:jsr250-api'
+}
+
+shadowJar {
+  classifier = ""
+  dependencies {
+    include(dependency('com.google.auto.factory:auto-factory'))
+  }
+  exclude 'com/google/auto/factory/processor/**'
+  exclude 'META-INF/services/'
+  exclude 'META-INF/maven/'
+}
+
+configurations.archives.artifacts.removeAll {
+    it.archiveTask.is jar
+}
+
+artifacts {
+  archives shadowJar
+}
+
+conf2ScopeMappings.mappings.remove(configurations.compile)
+conf2ScopeMappings.addMapping(0, configurations.pomCompile, "compile")
+
 
 
 
