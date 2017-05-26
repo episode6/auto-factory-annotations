@@ -17,7 +17,7 @@ Download
 
 ```groovy
 annotationProcessor 'com.google.auto.factory:auto-factory:1.0-beta5'
-provided 'com.episode6.hackit.auto.factory:auto-factory-annotations:0.0.1-SNAPSHOT'
+provided 'com.episode6.hackit.auto.factory:auto-factory-annotations:1.0-beta5'
 ```
 
 
