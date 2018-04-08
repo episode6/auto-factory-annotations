@@ -3,7 +3,7 @@ buildscript {
     jcenter()
   }
   dependencies { 
-    classpath 'com.episode6.hackit.deployable:deployable:0.1.10'
+    classpath 'com.episode6.hackit.deployable:deployable:0.1.11'
     classpath 'com.episode6.hackit.gdmc:gdmc:0.1.8'
     classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.3'
   }
@@ -56,9 +56,7 @@ artifacts {
   archives shadowJar
 }
 
-afterEvaluate {
-  conf2ScopeMappings.mappings.remove(configurations.implementation)
-  mavenDependencies {
-    map "pomCompile", "compile"
-  }
+mavenDependencies {
+  unmap "implementation"
+  map "pomCompile", "compile"
 }
