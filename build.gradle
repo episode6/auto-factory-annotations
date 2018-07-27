@@ -1,16 +1,19 @@
 buildscript {
   repositories {
     jcenter()
+    maven {
+      url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
   }
   dependencies { 
-    classpath 'com.episode6.hackit.deployable:deployable:0.1.11'
-    classpath 'com.episode6.hackit.gdmc:gdmc:0.1.8'
+    classpath 'com.episode6.hackit.deployable:deployable:0.2.0-SNAPSHOT'
+    classpath 'com.episode6.hackit.gdmc:gdmc:0.1.9'
     classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
   }
 }
 
-task wrapper(type: Wrapper) {
-  gradleVersion = "4.4"
+wrapper {
+  gradleVersion = "4.9"
   distributionType = "all"
 }
 
@@ -48,12 +51,11 @@ shadowJar {
   exclude 'META-INF/maven/'
 }
 
-configurations.archives.artifacts.removeAll {
-    it.archiveTask.is jar
-}
-
-artifacts {
-  archives shadowJar
+deployable.publication {
+  artifacts.removeAll {
+    it.classifier == null && it.extension == "jar"
+  }
+  artifact shadowJar
 }
 
 mavenDependencies {
