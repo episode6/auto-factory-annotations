@@ -11,7 +11,7 @@ node {
     gradleRunner = fileLoader.fromGit(
         'gradle/GradleRunner',
         'git@github.com:episode6/jenkins-pipelines.git',
-        'v0.0.7',
+        'v0.0.8',
         null,
         '')
   }
@@ -24,5 +24,5 @@ node {
     gradleRunner.runGradle("test", "check", false)
   }
 
-  gradleRunner.maybeDeploy()
+  gradleRunner.deploy()
 }

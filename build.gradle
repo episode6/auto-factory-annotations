@@ -51,14 +51,14 @@ shadowJar {
   exclude 'META-INF/maven/'
 }
 
-deployable.publication {
-  artifacts.removeAll {
-    it.classifier == null && it.extension == "jar"
+deployable {
+  publication.main {
+    artifact shadowJar
   }
-  artifact shadowJar
+
+  pom.dependencyConfigurations {
+    clear()
+    map "pomCompile", "compile"
+  }
 }
 
-mavenDependencies {
-  unmap "implementation"
-  map "pomCompile", "compile"
-}
